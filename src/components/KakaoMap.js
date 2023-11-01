@@ -137,10 +137,10 @@ export default function KakaoMap() {
     geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
   };
 
-  const addPath = (position, path) => {
+  const addPath = (position, address) => {
     const copyPaths = [...paths];
     copyPaths.push({
-      address: path[0].address.address_name,
+      address: address,
       // content: marker.content,
       lat: position.lat,
       lng: position.lng,
@@ -238,7 +238,7 @@ export default function KakaoMap() {
         <MapMarker
           draggable={true}
           position={position}
-          onClick={() => addPath(position, path)}
+          onClick={() => addPath(position, path[0].address.address_name)}
           image={pinOption}
         />
 
@@ -248,7 +248,7 @@ export default function KakaoMap() {
             draggable={true}
             position={marker.position}
             onDragEnd={updatePath}
-            onClick={() => addPath(marker.position, path)}
+            onClick={() => addPath(marker.position, marker.address)}
             image={markerOption}
           />
         ))}

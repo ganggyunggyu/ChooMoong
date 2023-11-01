@@ -12,9 +12,9 @@ export default function Sidebar({
   setPath,
   setPosition,
 }) {
+  const a = false;
   const [input, setInput] = useState('');
   const style = {
-    display: 'absolute',
     top: '0',
     left: '0',
     alignItems: 'center',
@@ -22,8 +22,9 @@ export default function Sidebar({
     border: 'solid 1px #ddd',
     background: '#C9ADA1',
     position: 'fixed',
-    zIndex: '10',
     color: 'white',
+    opacity: '0.81',
+    zIndex: '1',
   };
   return (
     <Resizable
@@ -42,13 +43,18 @@ export default function Sidebar({
         topLeft: false,
       }}
     >
-      <div className='flex items-center justify-center gap-3 p-3'>
+      <div className='flex items-center justify-center gap-3 p-3  overflow-auto'>
         <input
-          className='p-1 text-zinc-500 ring-black rounded-md'
+          className='p-1 text-zinc-500 ring-black rounded-md focus:ring-2 focus:ring-inset focus:ring-red-200'
           type='text'
           value={input}
           onChange={(e) => {
             setInput(e.target.value);
+          }}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              setSearchValue(input);
+            }
           }}
         />
         <button
@@ -62,10 +68,13 @@ export default function Sidebar({
           검색
         </button>
       </div>
-      <div className='z-50 flex flex-col items-center justify-center gap-1 py-2'>
-        <p className='p-1' style={{ borderBottom: '2px solid #EAE0CC' }}>
-          검색 결과
-        </p>
+      <p
+        className='text-center py-3'
+        style={{ borderBottom: '2px solid #EAE0CC' }}
+      >
+        검색 결과
+      </p>
+      <div className='flex flex-col items-center gap-1 py-2 overflow-auto max-h-48'>
         {/* <p style={{ backgroundColor: '#C9ADA1' }} className='w-full h-2'></p> */}
         {searchMarkers.map((marker, i) => {
           return (
@@ -79,10 +88,13 @@ export default function Sidebar({
           );
         })}
       </div>
-      <div className='z-50 flex flex-col items-center justify-center gap-2 py-2'>
-        <p className='p-1' style={{ borderBottom: '2px solid #EAE0CC' }}>
-          추억의 장소들
-        </p>
+      <p
+        className='text-center py-3'
+        style={{ borderBottom: '2px solid #EAE0CC' }}
+      >
+        추억의 장소들
+      </p>
+      <div className=' flex flex-col items-center gap-1 py-2 overflow-y-scroll max-h-48'>
         {paths.map((path, i) => {
           return (
             <p key={i} className='cursor-pointer'>
