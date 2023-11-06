@@ -3,6 +3,7 @@
 import React from 'react';
 import GroupUserCard from './GroupUserCard';
 import GroupInput from './GroupInput';
+import GroupButton from './GroupButton';
 
 export default function GroupDetail() {
   const groupMembers = [
@@ -18,8 +19,8 @@ export default function GroupDetail() {
     { userName: '김영호' },
   ];
   return (
-    <div className="flex flex-col items-center w-6/12 gap-5 mt-40 md:mt-20 transition-all">
-      <h1 className="text-4xl">그룹 이름</h1>
+    <div className="flex flex-col items-center w-10/12 gap-5 mt-40 md:mt-20 transition-all">
+      <h1 className=" text-4xl">그룹 이름</h1>
 
       <div className="flex flex-col gap-3 p-2">
         <GroupInput buttonText="검색" />
@@ -27,6 +28,7 @@ export default function GroupDetail() {
         {groupMembers.map((member, i) => {
           return <GroupUserCard key={i} userName={member.userName} />;
         })}
+        <GroupButton text="그룹 삭제" /> <GroupButton text="그룹 편집" />
       </div>
     </div>
   );

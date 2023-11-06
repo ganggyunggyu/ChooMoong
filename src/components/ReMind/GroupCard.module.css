@@ -1,0 +1,6 @@
+.CardContainer {
+  background-color: gray;
+}
+.CardContainer:hover {
+  background-color: black;
+}

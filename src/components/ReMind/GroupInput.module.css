@@ -1,0 +1,11 @@
+.GroupInputContainer {
+  border-color: gray;
+}
+.GroupInputButton {
+  border-color: gray;
+}
+.GroupInputButton:hover {
+  border-color: black;
+  background-color: black;
+  color: wheat;
+}

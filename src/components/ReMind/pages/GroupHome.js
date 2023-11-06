@@ -10,7 +10,7 @@ export default function GroupHome() {
       <div className="flex">
         <GroupList />
         <div className="w-full flex items-centers justify-center">
-          {/* <GroupDetail /> */}
+          <GroupDetail />
           <GroupCreate />
         </div>
       </div>
