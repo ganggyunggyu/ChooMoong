@@ -9,13 +9,11 @@ import GroupHome from './components/ReMind/pages/GroupHome';
 function App() {
   const [sidebarView, setSidebarView] = useState(true);
   const [isLogin, setIsLogin] = useState(false);
+
   return (
     <div>
-      <GroupHome />
-
-      {isLogin ? <FixedForm /> : null}
-      {/* <KakaoMap /> */}
-      {/* <ModalOpenButton></ModalOpenButton> */}
+      <FixedForm />
+      <KakaoMap />
     </div>
   );
 }
