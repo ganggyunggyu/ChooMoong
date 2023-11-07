@@ -1,5 +1,3 @@
-/** @format */
-
 import React, { useEffect, useState } from 'react';
 
 import { Resizable } from 're-resizable';
@@ -30,8 +28,8 @@ export default function Sidebar({
     <Resizable
       defaultSize={{ width: '20%', height: '100%' }}
       style={style}
-      minWidth={'300px'}
-      maxWidth={'80%'}
+      minWidth="300px"
+      maxWidth="80%"
       enable={{
         top: false,
         right: true,
@@ -43,24 +41,24 @@ export default function Sidebar({
         topLeft: false,
       }}
     >
-      <div className='flex items-center justify-center gap-3 p-3  overflow-auto'>
+      <div className="flex items-center justify-center gap-3 p-3  overflow-auto">
         <input
-          className='p-1 text-zinc-500 ring-black rounded-md focus:ring-2 focus:ring-inset focus:ring-red-200'
-          type='text'
+          className="p-1 text-zinc-500 ring-black rounded-md focus:ring-2 focus:ring-inset focus:ring-red-200"
+          type="text"
           value={input}
-          onChange={(e) => {
+          onChange={e => {
             setInput(e.target.value);
           }}
-          onKeyDown={(e) => {
+          onKeyDown={e => {
             if (e.key === 'Enter') {
               setSearchValue(input);
             }
           }}
         />
         <button
-          className='p-1 rounded-md'
+          className="p-1 rounded-md"
           style={{ background: '#C9ADA1', border: '2px solid #EAE0CC' }}
-          onClick={(e) => {
+          onClick={e => {
             e.preventDefault();
             setSearchValue(input);
           }}
@@ -68,36 +66,26 @@ export default function Sidebar({
           검색
         </button>
       </div>
-      <p
-        className='text-center py-3'
-        style={{ borderBottom: '2px solid #EAE0CC' }}
-      >
+      <p className="text-center py-3" style={{ borderBottom: '2px solid #EAE0CC' }}>
         검색 결과
       </p>
-      <div className='flex flex-col items-center gap-1 py-2 overflow-auto max-h-48'>
+      <div className="flex flex-col items-center gap-1 py-2 overflow-auto max-h-48">
         {/* <p style={{ backgroundColor: '#C9ADA1' }} className='w-full h-2'></p> */}
         {searchMarkers.map((marker, i) => {
           return (
-            <p
-              onClick={() => setPosition(marker.position)}
-              key={i}
-              className='cursor-pointer'
-            >
+            <p onClick={() => setPosition(marker.position)} key={i} className="cursor-pointer">
               {marker.content}
             </p>
           );
         })}
       </div>
-      <p
-        className='text-center py-3'
-        style={{ borderBottom: '2px solid #EAE0CC' }}
-      >
+      <p className="text-center py-3" style={{ borderBottom: '2px solid #EAE0CC' }}>
         추억의 장소들
       </p>
-      <div className=' flex flex-col items-center gap-1 py-2 overflow-y-scroll max-h-48'>
+      <div className=" flex flex-col items-center gap-1 py-2 overflow-y-scroll max-h-48">
         {paths.map((path, i) => {
           return (
-            <p key={i} className='cursor-pointer'>
+            <p key={i} className="cursor-pointer">
               {path.address}
             </p>
           );
