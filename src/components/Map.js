@@ -33,5 +33,5 @@ export default function Map() {
     console.log(mapObject);
     return () => null;
   }, []);
-  return <div id='map' value={mapObject} style={{ height: '100vh' }}></div>;
+  return <div id="map" value={mapObject} style={{ height: '100vh' }} />;
 }

@@ -11,7 +11,7 @@ function Calendar() {
   const [startDate, setStartDate] = useState(new Date('2023/01/01'));
   const [endDate, setEndDate] = useState(new Date('2023/10/23'));
   const ExampleCustomInput = ({ value, onClick }) => (
-    <button className='example-custom-input' onClick={onClick}>
+    <button className="example-custom-input" onClick={onClick}>
       {value}
     </button>
   );
@@ -32,22 +32,22 @@ function Calendar() {
     >
       <DatePicker
         selected={startDate}
-        onChange={(date) => setStartDate(date)}
+        onChange={date => setStartDate(date)}
         selectsStart
         startDate={startDate}
         endDate={endDate}
         locale={ko}
-        dateFormat='yyyy년 MM월 dd일'
+        dateFormat="yyyy년 MM월 dd일"
       />
       <DatePicker
         selected={endDate}
-        onChange={(date) => setEndDate(date)}
+        onChange={date => setEndDate(date)}
         selectsEnd
         startDate={startDate}
         endDate={endDate}
         minDate={startDate}
         locale={ko}
-        dateFormat='yyyy년 MM월 dd일'
+        dateFormat="yyyy년 MM월 dd일"
       />
     </div>
   );
