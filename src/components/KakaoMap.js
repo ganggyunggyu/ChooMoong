@@ -1,18 +1,16 @@
 /** @format */
 
 import React, { useEffect, useRef, useState } from 'react';
+import { useRecoilState } from 'recoil';
+import { searchValueState } from '../atoms';
 
-import {
-  Map,
-  MapMarker,
-  Polyline,
-  MarkerClusterer,
-} from 'react-kakao-maps-sdk';
+import { Map, MapMarker, Polyline, MarkerClusterer } from 'react-kakao-maps-sdk';
 import Sidebar from './Sidebar';
 
 const { kakao } = window;
 
 export default function KakaoMap() {
+  const [searchValue, setSearchValue] = useRecoilState(searchValueState);
   const markerOption = {
     src: 'https://img.icons8.com/?size=512&id=Fzu67Eub3E1Q&format=png', // 마커이미지의 주소입니다
     size: {
@@ -81,8 +79,7 @@ export default function KakaoMap() {
   // ]);
   const [paths, setPaths] = useState([]);
   const [address, setAddress] = useState('');
-  const [searchValue, setSearchValue] = useState('');
-  //검색결과로 찍히는 마커가 마커
+
   const [searchMarkers, setSearchMarkers] = useState([]);
   const [map, setMap] = useState();
   const [level, setLevel] = useState(3);
@@ -121,10 +118,10 @@ export default function KakaoMap() {
     });
   };
   const isSetPath = () => {
-    var geocoder = new kakao.maps.services.Geocoder();
+    let geocoder = new kakao.maps.services.Geocoder();
 
-    var coord = new kakao.maps.LatLng(position.lat, position.lng);
-    var callback = function (result, status) {
+    let coord = new kakao.maps.LatLng(position.lat, position.lng);
+    let callback = function (result, status) {
       if (status === kakao.maps.services.Status.OK) {
         console.log(result);
         // console.log(
@@ -154,7 +151,7 @@ export default function KakaoMap() {
       lng: mouseEvent.latLng.getLng(),
     });
 
-  const isSearchSubmit = (searchValue) => {
+  const isSearchSubmit = searchValue => {
     if (!map) return;
     const ps = new kakao.maps.services.Places();
     ps.keywordSearch(searchValue, (data, status, _pagination) => {
@@ -164,7 +161,7 @@ export default function KakaoMap() {
         const bounds = new kakao.maps.LatLngBounds();
         let markers = [];
 
-        for (var i = 0; i < data.length; i++) {
+        for (let i = 0; i < data.length; i++) {
           // @ts-ignore
           markers.push({
             data: data[i],
@@ -206,62 +203,51 @@ export default function KakaoMap() {
   }, [searchMarkers]);
 
   return (
-    <>
-      <Map
-        center={position} // 지도의 중심 좌표
-        style={{ width: '100%', height: '100vh' }} // 지도 크기
-        level={level} // 지도 확대 레벨
-        onClick={isSetPosition}
-        onCreate={setMap}
-        isPanto={true}
-      >
-        <Polyline
-          path={paths}
-          strokeWeight={2} // 선의 두께입니다
-          strokeColor={'#4D6A6D'} // 선의 색깔입니다
-          strokeOpacity={1} // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
-          strokeStyle={'solid'} // 선의 스타일입니다
-          onCreate={setClickLine}
-        />
-        {paths.map((path, i) => {
-          return (
-            <MapMarker
-              key={i}
-              draggable={true}
-              // onDragEnd={updatePath}
-              position={path}
-              image={pinOption}
-            />
-          );
-        })}
-
-        <MapMarker
-          draggable={true}
-          position={position}
-          onClick={() => addPath(position, path[0].address.address_name)}
-          image={pinOption}
-        />
-
-        {searchMarkers.map((marker, i) => (
+    <Map
+      center={position} // 지도의 중심 좌표
+      style={{ width: '100vw', height: '100vh' }} // 지도 크기
+      level={level} // 지도 확대 레벨
+      onClick={isSetPosition}
+      onCreate={setMap}
+      isPanto={true}
+    >
+      <Polyline
+        path={paths}
+        strokeWeight={2} // 선의 두께입니다
+        strokeColor="#4D6A6D" // 선의 색깔입니다
+        strokeOpacity={1} // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
+        strokeStyle="solid" // 선의 스타일입니다
+        onCreate={setClickLine}
+      />
+      {paths.map((path, i) => {
+        return (
           <MapMarker
             key={i}
             draggable={true}
-            position={marker.position}
-            onDragEnd={updatePath}
-            onClick={() => addPath(marker.position, marker.address)}
-            image={markerOption}
+            // onDragEnd={updatePath}
+            position={path}
+            image={pinOption}
           />
-        ))}
-      </Map>
+        );
+      })}
 
-      <Sidebar
-        searchValue={searchValue}
-        setSearchValue={setSearchValue}
-        paths={paths}
-        searchMarkers={searchMarkers}
-        setPath={setPath}
-        setPosition={setPosition}
+      <MapMarker
+        draggable={true}
+        position={position}
+        onClick={() => addPath(position, path[0].address.address_name)}
+        image={pinOption}
       />
-    </>
+
+      {searchMarkers.map((marker, i) => (
+        <MapMarker
+          key={i}
+          draggable={true}
+          position={marker.position}
+          onDragEnd={updatePath}
+          onClick={() => addPath(marker.position, marker.address)}
+          image={markerOption}
+        />
+      ))}
+    </Map>
   );
 }
