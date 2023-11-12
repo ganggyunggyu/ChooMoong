@@ -10,7 +10,6 @@ export default function Sidebar({
   setPath,
   setPosition,
 }) {
-  const a = false;
   const [input, setInput] = useState('');
   const style = {
     top: '0',

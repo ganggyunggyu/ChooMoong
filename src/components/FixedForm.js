@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import KakaoLogin from './KakaoLogin';
 
 export default function FixedForm() {
-  const [isLoginModal, setIsLoginModal] = useState(false);
-
   const isModalView = () => {};
 
   return (
