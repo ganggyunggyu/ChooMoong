@@ -5,12 +5,13 @@ import { useRecoilState } from 'recoil';
 import { searchValueState } from '../atoms';
 
 import { Map, MapMarker, Polyline, MarkerClusterer } from 'react-kakao-maps-sdk';
-import Sidebar from './Sidebar';
+import Sidebar from '../components/Sidebar';
 
 const { kakao } = window;
 
 export default function KakaoMap() {
   const [searchValue, setSearchValue] = useRecoilState(searchValueState);
+
   const markerOption = {
     src: 'https://img.icons8.com/?size=512&id=Fzu67Eub3E1Q&format=png', // 마커이미지의 주소입니다
     size: {
@@ -151,7 +152,7 @@ export default function KakaoMap() {
       lng: mouseEvent.latLng.getLng(),
     });
 
-  const isSearchSubmit = searchValue => {
+  const submitSearch = searchValue => {
     if (!map) return;
     const ps = new kakao.maps.services.Places();
     ps.keywordSearch(searchValue, (data, status, _pagination) => {
@@ -186,7 +187,7 @@ export default function KakaoMap() {
   };
 
   useEffect(() => {
-    isSearchSubmit(searchValue);
+    submitSearch(searchValue);
   }, [searchValue]);
   useEffect(() => {
     console.log('단일 마커의 주소 정보 : ', path);
@@ -248,6 +249,12 @@ export default function KakaoMap() {
           image={markerOption}
         />
       ))}
+      <Sidebar
+        setSearchValue={setSearchValue}
+        paths={paths}
+        searchMarkers={searchMarkers}
+        setPosition={setPosition}
+      />
     </Map>
   );
 }

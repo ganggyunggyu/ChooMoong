@@ -1,8 +1,0 @@
-.GroupUserCardButton {
-  border-color: black;
-}
-.GroupUserCardButton:hover {
-  border-color: red;
-  background-color: red;
-  color: wheat;
-}

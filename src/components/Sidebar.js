@@ -90,6 +90,7 @@ export default function Sidebar({
           );
         })}
       </div>
+      <button className="bg-indigo-800 p-3 rounded-md hover:scale-150 transition-all">검색</button>
     </Resizable>
   );
 }
