@@ -2,8 +2,6 @@ import KakaoMap from './pages/KakaoMap';
 import { Route, Routes } from 'react-router-dom';
 import KakaoAuth from './components/KakaoAuth';
 import HeaderBar from './components/HeaderBar';
-import Main from './pages/Main';
-import Sidebar from './components/Sidebar';
 
 function App() {
   return (
